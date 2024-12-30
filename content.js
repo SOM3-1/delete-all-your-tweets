@@ -5,7 +5,27 @@ const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 const processTweet = async (tweet) => {
   try {
     console.log("Processing a tweet...");
+    const undoRetweetButton = tweet.querySelector('button[data-testid="unretweet"]');
+    if (undoRetweetButton) {
+      console.log("Undo retweet button found. Clicking...");
+      undoRetweetButton.click();
+      await wait(2000); 
 
+      const confirmUndoRetweet = document.querySelector(
+        'div[data-testid="unretweetConfirm"]'
+      );
+      if (confirmUndoRetweet) {
+        console.log("Confirming undo retweet...");
+        confirmUndoRetweet.click();
+        console.log("Undo retweet successful.");
+        await wait(3000);
+        return true;
+      } else {
+        console.warn("Confirmation for undo retweet not found. Skipping...");
+        return false;
+      }
+    }
+else{
     const moreButton = tweet.querySelector('button[data-testid="caret"]');
     if (!moreButton) {
       console.warn("More button not found for this tweet. Skipping...");
@@ -44,6 +64,7 @@ const processTweet = async (tweet) => {
     await wait(3000);
 
     return true;
+  }
   } catch (error) {
     console.error("Error processing tweet:", error);
     return false;
