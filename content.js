@@ -10,7 +10,6 @@ const getOwnerUsernameFromURL = () => {
 
 const isOwnTweet = (tweet) => {
   const ownerUsername = getOwnerUsernameFromURL();
-  console.log("ownerUsername", typeof(ownerUsername))
   const usernameElement = tweet.querySelector('a[role="link"] > div > span');
   if (usernameElement && ownerUsername) {
     const tweetUsername = usernameElement.innerText.replace('@', '').trim();
