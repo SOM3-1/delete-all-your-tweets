@@ -32,7 +32,7 @@ const processTweet = async (tweet) => {
         console.log("Unlike button found. Clicking...");
         unlikeButton.click();
         console.log("Tweet unliked.");
-        await wait(1000);
+        await wait(10);
         return true;
       } else {
         console.warn("Unlike button not found for this tweet. Skipping...");
@@ -62,7 +62,7 @@ const processTweet = async (tweet) => {
         console.log("Confirming undo retweet...");
         confirmUndoRetweet.click();
         console.log("Undo retweet successful.");
-        await wait(3000);
+        await wait(2000);
         return true;
       } else {
         console.warn("Confirmation for undo retweet not found. Skipping...");
@@ -133,8 +133,8 @@ const deleteTweetsSequentially = async () => {
 
     if (tweets.length === 0) {
       console.log("No tweets found. Scrolling down...");
-      window.scrollBy(0, window.innerHeight);
-      await wait(5000);
+      window.scrollBy(0, 2 * window.innerHeight);
+      await wait(2000);
       const moreTweets = document.querySelectorAll('article[data-testid="tweet"]');
       if (moreTweets.length === 0) {
         console.log("No more tweets to process. Exiting...");
@@ -151,8 +151,8 @@ const deleteTweetsSequentially = async () => {
     }
 
     console.log("Finished current batch. Scrolling down for more tweets...");
-    window.scrollBy(0, window.innerHeight);
-    await wait(5000);
+    window.scrollBy(0,2*  window.innerHeight);
+    await wait(2000);
   }
 
   console.log("Finished processing all tweets.");
